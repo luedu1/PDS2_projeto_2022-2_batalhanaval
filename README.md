@@ -13,7 +13,7 @@ Davi Fonseca Dumont - 2020088201 <br />
 ## USERSTORIES
 
 <p>
--Como jogador, quero poder posicionar e selecionar quais/quantos barcos serão colocados no tabuleiro; 
--Como jogador, quero poder visualizar os meus barcos no tabuleiro;
--Como jogador, gostaria poder fazer um ataque a uma nave inimiga;
+-Como jogador, quero poder posicionar e selecionar quais/quantos barcos serão colocados no tabuleiro; <br/>
+-Como jogador, quero poder visualizar os meus barcos no tabuleiro; <br/>
+-Como jogador, gostaria poder fazer um ataque a uma nave inimiga; <br/>
 </p>
