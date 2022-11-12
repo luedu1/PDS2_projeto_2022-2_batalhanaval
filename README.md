@@ -16,4 +16,6 @@ Davi Fonseca Dumont - 2020088201 <br />
 -Como jogador, quero poder posicionar e selecionar quais/quantos barcos serão colocados no tabuleiro; <br/>
 -Como jogador, quero poder visualizar os meus barcos no tabuleiro; <br/>
 -Como jogador, gostaria poder fazer um ataque a uma barco inimiga; <br/>
+-Como jogador, gostaria de visualizar o tabuleiro inimigo, com marcação onde já realizei ataques; <br/>
+-Como jogador, gostaria de saber com identificação onde ataquei, se acertei o ataque a um navio, ou na água; <br/>
 </p>
