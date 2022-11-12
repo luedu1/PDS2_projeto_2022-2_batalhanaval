@@ -18,4 +18,5 @@ Davi Fonseca Dumont - 2020088201 <br />
 -Como jogador, gostaria poder fazer um ataque a uma barco inimiga; <br/>
 -Como jogador, gostaria de visualizar o tabuleiro inimigo, com marcação onde já realizei ataques; <br/>
 -Como jogador, gostaria de saber com identificação onde ataquei, se acertei o ataque a um navio, ou na água; <br/>
+-Como jogador, gostaria de saber quando o jogo acaba, e quem é o vencedor. <br/>
 </p>
