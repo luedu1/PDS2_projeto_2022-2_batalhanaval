@@ -20,3 +20,25 @@ Davi Fonseca Dumont - 2020088201 <br />
 -Como jogador, gostaria de saber com identificação onde ataquei, se acertei o ataque a um navio, ou na água; <br/>
 -Como jogador, gostaria de saber quando o jogo acaba, e quem é o vencedor. <br/>
 </p>
+
+## RASCUNHO
+
+<p>
+tabuleiro.h
+privado [tamanho, estado celula(vazia, navio, celula atacada vazio, celula atacada acerto)]
+publico [construtor, 
+
+navio.h [
+submarino.h (navio de 1 bloco)
+
+cruzador.h (navio de 3 blocos)
+
+destroyer.h (navio de 4 blocos)
+
+portaviao.h (navio de 5 blocos)]
+
+jogador.h
+
+</p>
+
+
