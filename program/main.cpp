@@ -39,6 +39,12 @@ int pos_restantes = 14;
 std::cout << '\n' << '\n' << "Submarino(" << pos_restantes << " posições restantes): ";
 
 std:: cin >> num_submarino;
+  
+  while(num_submarino < 0 || num_submarino > 14){
+    std::cout << '\n' << "Número invávlido, digite novamente: ";
+    std:: cin >> num_submarino;
+  }
+  
 pos_restantes = pos_restantes - num_submarino;
 
 int pos_restantes_cruzador = (pos_restantes)/3;
@@ -46,9 +52,12 @@ int pos_restantes_cruzador = (pos_restantes)/3;
 if(pos_restantes_cruzador != 0){
 std::cout << '\n' << "Cruzador(" << pos_restantes << " posições restantes ou até " << pos_restantes_cruzador << " unidades de Cruzador): ";
   
-
-  
 std:: cin >> num_cruzador;
+
+  while(num_cruzador < 0 || num_cruzador > pos_restantes_cruzador){
+    std::cout << '\n' << "Número invávlido, digite novamente: ";
+    std:: cin >> num_cruzador;
+  }
   
 pos_restantes = pos_restantes - 3*num_cruzador;
   
@@ -66,6 +75,11 @@ std::cout << '\n' << "Destroyer(" << pos_restantes << " posições restantes ou 
 
   
 std:: cin >> num_destroyer;
+
+  while(num_destroyer < 0 || num_destroyer > pos_restantes_destroyer){
+    std::cout << '\n' << "Número invávlido, digite novamente: ";
+    std:: cin >> num_destroyer;
+  }
   
 pos_restantes = pos_restantes - 4*num_destroyer;
   
@@ -82,6 +96,11 @@ std::cout << '\n' << "Porta-aviões(" << pos_restantes << " posições restantes
   
   
 std:: cin >> num_p_avioes;
+
+  while(num_p_avioes < 0 || num_p_avioes > pos_restantes_p_avioes){
+    std::cout << '\n' << "Número invávlido, digite novamente: ";
+    std:: cin >> num_p_avioes;
+  }
 
 pos_restantes = pos_restantes - 4*num_p_avioes;
   
@@ -129,6 +148,11 @@ while(pos_restantes != 0){
     int add_sub;
     std::cin >> add_sub;
 
+      while(add_sub < 0 || add_sub > pos_restantes){
+        std::cout << '\n' << "Número invávlido, digite novamente: ";
+        std:: cin >> add_sub;
+      }
+
     pos_restantes -= add_sub;
     num_submarino += add_sub;
 
@@ -137,6 +161,11 @@ while(pos_restantes != 0){
 
     int add_cru;
     std::cin >> add_cru;
+
+      while(add_cru < 0 || add_cru > pos_restantes){
+        std::cout << '\n' << "Número invávlido, digite novamente: ";
+        std:: cin >> add_cru;
+      }
 
     pos_restantes -= 3*add_cru;
     num_cruzador += add_cru;
@@ -148,6 +177,11 @@ while(pos_restantes != 0){
     int add_des;
     std::cin >> add_des;
 
+      while(add_des < 0 || add_des > pos_restantes){
+        std::cout << '\n' << "Número invávlido, digite novamente: ";
+        std:: cin >> add_des;
+      }
+
     pos_restantes -= 4*add_des;
     num_destroyer += add_des;
     }
@@ -157,6 +191,11 @@ while(pos_restantes != 0){
 
     int add_pta;
     std::cin >> add_pta;
+
+      while(add_pta < 0 || add_pta > pos_restantes){
+        std::cout << '\n' << "Número invávlido, digite novamente: ";
+        std:: cin >> add_pta;
+      }
 
     pos_restantes -= 5*add_pta;
     num_p_avioes += add_pta;
@@ -170,12 +209,12 @@ while(pos_restantes != 0){
     }
   }
 
-  //------------------------------------------------------------------------------------------------------------------------//
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------//
 int num_submarino2;
 int num_cruzador2;
 int num_destroyer2;
 int num_p_avioes2;
-//---------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 std::cout << '\n' << Linha << '\n' ;
 std::cout << '\n' << J2.nome << ", digite a quantidade de barcos que quer no tabuleiro:";
@@ -238,7 +277,7 @@ else{
   std::cout << '\n' << "Número insuficiente de casas para alocar Porta-aviões" << '\n';
 }
 
-//------------------------------------------------------------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------------------------------------------------------------------------//
   
 while(pos_restantes2 != 0){
   std::cout << '\n'<< Linha << '\n';
@@ -275,6 +314,7 @@ while(pos_restantes2 != 0){
 
     int add_sub2;
     std::cin >> add_sub2;
+      
 
     pos_restantes2 -= add_sub2;
     num_submarino2 += add_sub2;
@@ -316,19 +356,19 @@ while(pos_restantes2 != 0){
     break;
     }
   }
-//---------------------------------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------------------------------------------------------------------------//
 
   std::cout << '\n' << "Vamos dar início a alocação das peças no tabuleiro!" << '\n' << '\n';
 
   std::cout << J1.nome << ", esse é o seu tabuleiro atual: " << '\n' << '\n';
 
-  std::cout << "|---------------------------|" << '\n';
+  std::cout << "|----------------------------|" << '\n';
 
   for(int i = 0; i < 9; i++){
-    std::cout << "|~~~~~~~~~~~~~~~~~~~~~~~~~~~|" << '\n';
+    std::cout << "|~~~~~~~~~~~~~~~~~~~~~~~~~~~~|" << '\n';
   }
   
-  std::cout << "|---------------------------|" << '\n';
+  std::cout << "|----------------------------|" << '\n';
 
   std::cout << '\n' << "Onde você quer colocar seus barcos?";
   
