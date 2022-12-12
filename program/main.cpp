@@ -5,7 +5,7 @@
 std::string Linha = "|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|";
 std::string Boas_Vindas = "|                                                                   Olá, seja bem-vindo ao jogo de Batalha Naval!                                                                  |";
 std::string Barra = "|                                                                                                                                                                                  |";
-std::string Anuncio_Regras = "              As regras do jogo são as seguintes: ";
+std::string Anuncio_Regras = "                                                                       As regras do jogo são as seguintes: ";
 std::string Regras = "1) Cada jogador irá dispor de até 14 casas para alocar seus barcos; \n\n2) O jogador poderá escolher entre 4 tipos diferentes de barco: \n * Submarino (1 posição); \n * Cruzador (3 posições); \n * Destroyer (4 posições); \n * Porta-avião (5 posições); \n\n3) Serão gerados na tela dois tabuleiros, um para visualizar os barcos e ataques sofridos e outro para visualizar os ataques realizados ao seu inimigo; \n\n4) Ao receber ataques certeiros, o usuário será notificado da saúde de seus barcos; \n\n5) O usuário será notificado se estiver realizando ataques repetidos, podendo refazê-los; \n\n6) O jogo acaba quando todos os barcos de um dos jogadores for totalmente destruído; \n\n";
 
 std::string Inicio_Jogo = "|--------------------------------------------------------------------------Agora vamos iniciar o jogo!-----------------------------------------------------------------------------|";
@@ -25,10 +25,10 @@ std::cout << '\n'<< "2)";
 std::cin >> J2.nome;
 
 //---------------------------------------------------------------------------------------------------------------//
-int num_submarino;
-int num_cruzador;
-int num_destroyer;
-int num_p_avioes;
+int num_submarino = 0;
+int num_cruzador = 0;
+int num_destroyer = 0;
+int num_p_avioes = 0;
 
 //-------------------------------------------------------------------------------------------------------------//
 std::cout << '\n' << Linha << '\n' ;
@@ -214,10 +214,10 @@ while(pos_restantes != 0){
   }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
-int num_submarino2;
-int num_cruzador2;
-int num_destroyer2;
-int num_p_avioes2;
+int num_submarino2 = 0;
+int num_cruzador2 = 0;
+int num_destroyer2 = 0;
+int num_p_avioes2 = 0;
 //----------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 std::cout << '\n' << Linha << '\n' ;
@@ -403,15 +403,14 @@ while(pos_restantes2 != 0){
   }
 //------------------------------------------------------------------------------------------------------------------------------------------------//
 
-  std::cout << '\n' << "Vamos dar início a alocação das peças no tabuleiro!" << '\n' << '\n';
+  std::cout << '\n' << "Vamos dar início ao posicionamento das peças no tabuleiro!" << '\n' << '\n';
 
   int _px , _py, _px2, _py2;
 
-  J1.num_barcos = 2;
-  J2.num_barcos = 2;
+  J1.num_barcos = num_submarino + num_cruzador + num_destroyer + num_p_avioes;
+  J2.num_barcos = num_submarino2 + num_cruzador2 + num_destroyer2 + num_p_avioes2;
 
-  char tabela[12][12];
-
+//-----------------------------------------------------------------------------------------------------------------------------------------------//
   for(int i = 1; i < 12; i++){
     for(int j = 0; j < 24; j++){
       J1.tabuleiro_ataque[i][j] = '~';
@@ -462,22 +461,148 @@ while(pos_restantes2 != 0){
       J2.tabuleiro_defesa[i][23] = '|';
     }
 
-  std::cout << "Vamos iniciar o jogo." << '\n' << '\n';
 
+  //-----------------------------------------------------------------------------------------------------------------------------------------//
   std::cout << J1.nome << ", posicione suas peças no tabuleiro." << '\n' << '\n';
 
-  std::cout << "Você dispõe de " << J1.num_barcos << " barcos."<< '\n' << '\n';
+  std::cout << "Você dispõe de " << J1.num_barcos << " barcos sendo eles: "<< '\n' << '\n';
+
+  std::cout << num_submarino << " Submarino(s)" << '\n' << '\n' << num_cruzador << " Cruzador(es)" << '\n' << '\n' << num_destroyer << " Destroyer(s)"
+    << '\n' << '\n' << num_p_avioes << " Porta-avião(ões)";
 
   int inicializador_barcos1 = J1.num_barcos;
-
-  std::cout << "Onde quer alocá-los? Digite a linha e a sua respectiva coluna" << '\n';
+  int inicializador_subs = num_submarino;
+  int inicializador_cru = num_cruzador;
+  int inicializador_des = num_destroyer;
+  int inicializador_pt_a = num_p_avioes;
+  
+  std::cout << '\n' << '\n' << "Onde quer posicioná-los? Digite a linha e a sua respectiva coluna" << '\n';
 
   while(inicializador_barcos1 != 0){
-    std::cin >> _px >> _py;
+    if(num_submarino != 0){
+      std::cout << "Ponha seus Submarinos no tabuleiro: " << '\n';
 
-    J1.tabuleiro_defesa[_px][_py] = 'b';
+      while(inicializador_subs != 0){
+      
+      std::cin >> _px >> _py;
 
-    inicializador_barcos1 --;
+      while(_px <= 0 || _px >=11 || _py <= 0 || _py >= 23 ){
+        std::cout << '\n' << "Posição inválida, digite novamente: " << '\n';
+        std::cin >> _px >> _py;
+      }
+
+      while(J1.tabuleiro_defesa[_px][_py] == 'b'){
+        std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
+        std::cin >> _px >> _py;
+      }
+
+        J1.tabuleiro_defesa[_px][_py] = 'b';
+
+      inicializador_barcos1 --;
+      inicializador_subs --;
+    }
+      }
+
+    if(num_cruzador != 0){
+      std::cout << "Ponha seus Cruzadores no tabuleiro (lembrando, só será alocado se digitar as 3 unidades de casa): " << '\n';
+
+      while(inicializador_cru != 0){
+      
+      std::cin >> _px >> _py;
+
+      while(_px <= 0 || _px >=11 || _py <= 0 || _py >= 23){
+        std::cout << '\n' << "Posição inválida, digite novamente: " << '\n';
+        std::cin >> _px >> _py;
+          
+      }
+
+        int diferenca = _px - _py;
+
+        if(diferenca < 0){
+          diferenca = -1 * (diferenca);
+        }
+
+        while(diferenca != 2){
+          std::cout << diferenca << '\n';
+          std::cout << '\n' << "Quantidade invalida de casas, digite novamente: " << '\n';
+          std::cin >> _px >> _py;
+          diferenca = _px - _py;
+
+          if(diferenca < 0){
+          diferenca = -1 * (diferenca);
+        }
+          
+        }
+
+      while(J1.tabuleiro_defesa[_px][_py] == 'b' || J1.tabuleiro_defesa[_py][_py] == 'b' || J1.tabuleiro_defesa[_px][_px] == 'b'
+        || J1.tabuleiro_defesa[_py + 1][_py] == 'b' || J1.tabuleiro_defesa[_px][_px + 1] == 'b'){
+        
+        std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
+        std::cin >> _px >> _py;
+      }
+        if(_px > _py){
+          J1.tabuleiro_defesa[_px][_py] = 'b';
+          J1.tabuleiro_defesa[_py][_py] = 'b';
+          J1.tabuleiro_defesa[_py + 1][_py] = 'b';
+        }
+
+        J1.tabuleiro_defesa[_px][_py] = 'b';
+        J1.tabuleiro_defesa[_px][_px] = 'b';
+        J1.tabuleiro_defesa[_px][_px + 1] = 'b';
+
+
+      inicializador_barcos1 --;
+      inicializador_cru --;
+    }
+      }
+
+    if(num_destroyer != 0){
+      std::cout << "Ponha seus Destroyers no tabuleiro (lembrando, só será alocado se digitar as 4 unidades de casa): " << '\n';
+
+      while(inicializador_des != 0){
+      
+      std::cin >> _px >> _py;
+
+      while(_px <= 0 || _px >=11 || _py <= 0 || _py >= 23){
+        std::cout << '\n' << "Posição inválida, digite novamente: " << '\n';
+        std::cin >> _px >> _py;
+      }
+
+      while(J1.tabuleiro_defesa[_px][_py] == 'b'){
+        std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
+        std::cin >> _px >> _py;
+      }
+
+        J1.tabuleiro_defesa[_px][_py] = 'b';
+
+      inicializador_barcos1 --;
+      inicializador_des --;
+    }
+      }
+
+    if(num_p_avioes != 0){
+      std::cout << "Ponha seus Porta-Aviões no tabuleiro (lembrando, só será alocado se digitar as 5 unidades de casa): " << '\n';
+
+      while(inicializador_pt_a != 0){
+      
+      std::cin >> _px >> _py;
+
+      while(_px <= 0 || _px >=11 || _py <= 0 || _py >= 23){
+        std::cout << '\n' << "Posição inválida, digite novamente: " << '\n';
+        std::cin >> _px >> _py;
+      }
+
+      while(J1.tabuleiro_defesa[_px][_py] == 'b'){
+        std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
+        std::cin >> _px >> _py;
+      }
+
+        J1.tabuleiro_defesa[_px][_py] = 'b';
+
+      inicializador_barcos1 --;
+      inicializador_pt_a --;
+    }
+      }
   } 
 
   for(int i = 0; i < 12; i ++){
@@ -489,11 +614,21 @@ while(pos_restantes2 != 0){
 
   std::cout << '\n' << '\n';
 
+
+  //---------------------------------------------------------------------------------------------------------------------------------//
+  
   std::cout << J2.nome << ", posicione suas peças no tabuleiro." << '\n' << '\n';
 
-  std::cout << "Você dispõe de " << J2.num_barcos << " barcos."<< '\n' << '\n';
+  std::cout << "Você dispõe de " << J1.num_barcos << " barcos sendo eles: "<< '\n' << '\n';
 
+  std::cout << num_submarino2 << " Submarino(s)" << '\n' << '\n' << num_cruzador2 << " Cruzador(es)" << '\n' << '\n' << num_destroyer2 << " Destroyer(s)"
+    << '\n' << '\n' << num_p_avioes2 << " Porta-avião(ões)";
+  
   int inicializador_barcos2 = J2.num_barcos;
+  int inicializador_subs2 = num_submarino2;
+  int inicializador_cru2 = num_cruzador2;
+  int inicializador_des2 = num_destroyer2;
+  int inicializador_pt_a2 = num_p_avioes2;
 
   std::cout << "Onde quer alocá-los? Digite a linha e a sua respectiva coluna" << '\n'; 
 
@@ -515,9 +650,7 @@ while(pos_restantes2 != 0){
   std::cout << "Barcos posicionados, vamos iniciar as rodadas de ataque." << '\n' << '\n';
   
   while(J2.num_barcos != 0 || J1.num_barcos != 0){
-    /*if(U2.num_barcos != 0 || U1.num_barcos != 0){
-      break;
-    }*/
+    
     std::cout << J1.nome << ", digite onde quer fazer seu ataque: " << '\n' << '\n';
 
     std::cin >> _px >> _py;
@@ -529,6 +662,7 @@ while(pos_restantes2 != 0){
       J1.tabuleiro_ataque[_px][_py] = 'X';
       J2.num_barcos --;
     }
+
 
     for(int i = 0; i < 12; i ++){
     for(int j = 0; j < 24; j++){
@@ -545,6 +679,9 @@ while(pos_restantes2 != 0){
     std::cout << '\n';
   }
     std::cout << '\n';
+
+    if(J2.num_barcos == 0 || J1.num_barcos == 0){
+      break;}
 
   std::cout << J2.nome << ", digite onde quer fazer seu ataque: " << '\n' << '\n';
 
@@ -587,6 +724,8 @@ while(pos_restantes2 != 0){
   else if(J2.num_barcos == 0){
     std::cout << "Parabéns, " << J1.nome << ", você ganhou!!";
   }
+
+  std::cout << '\n' << '\n' << "|-------------------------------------------------------------FIM DO JOGO!-----------------------------------------------------------------|";
   
   return 0;
 }
