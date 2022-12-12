@@ -504,7 +504,7 @@ while(pos_restantes2 != 0){
       }
 
     if(num_cruzador != 0){
-      std::cout << "Ponha seus Cruzadores no tabuleiro (lembrando, só será alocado se digitar as 3 unidades de casa): " << '\n';
+      std::cout << "Ponha seus Cruzadores no tabuleiro (lembrando, só será alocado se digitar uma diferença de 2 unidades de casa): " << '\n';
 
       while(inicializador_cru != 0){
       
@@ -546,9 +546,9 @@ while(pos_restantes2 != 0){
           J1.tabuleiro_defesa[_py + 1][_py] = 'b';
         }
 
-        J1.tabuleiro_defesa[_px][_py] = 'b';
+        else{J1.tabuleiro_defesa[_px][_py] = 'b';
         J1.tabuleiro_defesa[_px][_px] = 'b';
-        J1.tabuleiro_defesa[_px][_px + 1] = 'b';
+        J1.tabuleiro_defesa[_px][_px + 1] = 'b';}
 
 
       inicializador_barcos1 --;
@@ -557,7 +557,7 @@ while(pos_restantes2 != 0){
       }
 
     if(num_destroyer != 0){
-      std::cout << "Ponha seus Destroyers no tabuleiro (lembrando, só será alocado se digitar as 4 unidades de casa): " << '\n';
+      std::cout << "Ponha seus Destroyers no tabuleiro (lembrando, só será alocado se digitar uma diferença de 3 unidades de casa): " << '\n';
 
       while(inicializador_des != 0){
       
@@ -568,12 +568,41 @@ while(pos_restantes2 != 0){
         std::cin >> _px >> _py;
       }
 
-      while(J1.tabuleiro_defesa[_px][_py] == 'b'){
+      int diferenca = _px - _py;
+
+        if(diferenca < 0){
+          diferenca = -1 * (diferenca);
+        }
+
+        while(diferenca != 3){
+          std::cout << diferenca << '\n';
+          std::cout << '\n' << "Quantidade invalida de casas, digite novamente: " << '\n';
+          std::cin >> _px >> _py;
+          diferenca = _px - _py;
+
+          if(diferenca < 0){
+          diferenca = -1 * (diferenca);
+        }
+          
+        }
+
+      while(J1.tabuleiro_defesa[_px][_py] == 'b' || J1.tabuleiro_defesa[_py][_py] == 'b' || J1.tabuleiro_defesa[_px][_px] == 'b'
+        || J1.tabuleiro_defesa[_py + 1][_py] == 'b' || J1.tabuleiro_defesa[_px][_px + 1] == 'b' || J1.tabuleiro_defesa[_py + 2][_py] == 'b' || J1.tabuleiro_defesa[_px][_px + 2] == 'b'){
+        
         std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
         std::cin >> _px >> _py;
       }
+        if(_px > _py){
+          J1.tabuleiro_defesa[_px][_py] = 'b';
+          J1.tabuleiro_defesa[_py][_py] = 'b';
+          J1.tabuleiro_defesa[_py + 1][_py] = 'b';
+          J1.tabuleiro_defesa[_py + 2][_py] = 'b';
+        }
 
-        J1.tabuleiro_defesa[_px][_py] = 'b';
+        else{J1.tabuleiro_defesa[_px][_py] = 'b';
+        J1.tabuleiro_defesa[_px][_px] = 'b';
+        J1.tabuleiro_defesa[_px][_px + 1] = 'b';
+        J1.tabuleiro_defesa[_px][_px + 2] = 'b';}
 
       inicializador_barcos1 --;
       inicializador_des --;
@@ -581,7 +610,7 @@ while(pos_restantes2 != 0){
       }
 
     if(num_p_avioes != 0){
-      std::cout << "Ponha seus Porta-Aviões no tabuleiro (lembrando, só será alocado se digitar as 5 unidades de casa): " << '\n';
+      std::cout << "Ponha seus Porta-Aviões no tabuleiro (lembrando, só será alocado se digitar uma diferença de 4 unidades de casa): " << '\n';
 
       while(inicializador_pt_a != 0){
       
@@ -592,12 +621,45 @@ while(pos_restantes2 != 0){
         std::cin >> _px >> _py;
       }
 
-      while(J1.tabuleiro_defesa[_px][_py] == 'b'){
+      
+      int diferenca = _px - _py;
+
+        if(diferenca < 0){
+          diferenca = -1 * (diferenca);
+        }
+
+        while(diferenca != 4){
+          std::cout << diferenca << '\n';
+          std::cout << '\n' << "Quantidade invalida de casas, digite novamente: " << '\n';
+          std::cin >> _px >> _py;
+          diferenca = _px - _py;
+
+          if(diferenca < 0){
+          diferenca = -1 * (diferenca);
+        }
+          
+        }
+
+      while(J1.tabuleiro_defesa[_px][_py] == 'b' || J1.tabuleiro_defesa[_py][_py] == 'b' || J1.tabuleiro_defesa[_px][_px] == 'b'
+        || J1.tabuleiro_defesa[_py + 1][_py] == 'b' || J1.tabuleiro_defesa[_px][_px + 1] == 'b' || J1.tabuleiro_defesa[_py + 2][_py] == 'b' || J1.tabuleiro_defesa[_px][_px + 2] == 'b' || J1.tabuleiro_defesa[_py + 3][_py] == 'b' || J1.tabuleiro_defesa[_px][_px + 3] == 'b'){
+        
         std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
         std::cin >> _px >> _py;
       }
+        if(_px > _py){
+          J1.tabuleiro_defesa[_px][_py] = 'b';
+          J1.tabuleiro_defesa[_py][_py] = 'b';
+          J1.tabuleiro_defesa[_py + 1][_py] = 'b';
+          J1.tabuleiro_defesa[_py + 2][_py] = 'b';
+          J1.tabuleiro_defesa[_py + 3][_py] = 'b';
+          
+        }
 
-        J1.tabuleiro_defesa[_px][_py] = 'b';
+        else{J1.tabuleiro_defesa[_px][_py] = 'b';
+        J1.tabuleiro_defesa[_px][_px] = 'b';
+        J1.tabuleiro_defesa[_px][_px + 1] = 'b';
+        J1.tabuleiro_defesa[_px][_px + 2] = 'b';
+        J1.tabuleiro_defesa[_px][_px + 3] = 'b';}
 
       inicializador_barcos1 --;
       inicializador_pt_a --;
@@ -617,28 +679,209 @@ while(pos_restantes2 != 0){
 
   //---------------------------------------------------------------------------------------------------------------------------------//
   
-  std::cout << J2.nome << ", posicione suas peças no tabuleiro." << '\n' << '\n';
+    std::cout << J2.nome << ", posicione suas peças no tabuleiro." << '\n' << '\n';
 
-  std::cout << "Você dispõe de " << J1.num_barcos << " barcos sendo eles: "<< '\n' << '\n';
+  std::cout << "Você dispõe de " << J2.num_barcos << " barcos sendo eles: "<< '\n' << '\n';
 
   std::cout << num_submarino2 << " Submarino(s)" << '\n' << '\n' << num_cruzador2 << " Cruzador(es)" << '\n' << '\n' << num_destroyer2 << " Destroyer(s)"
     << '\n' << '\n' << num_p_avioes2 << " Porta-avião(ões)";
-  
+
   int inicializador_barcos2 = J2.num_barcos;
   int inicializador_subs2 = num_submarino2;
   int inicializador_cru2 = num_cruzador2;
   int inicializador_des2 = num_destroyer2;
   int inicializador_pt_a2 = num_p_avioes2;
+  
+  std::cout << '\n' << '\n' << "Onde quer posicioná-los? Digite a linha e a sua respectiva coluna" << '\n';
 
-  std::cout << "Onde quer alocá-los? Digite a linha e a sua respectiva coluna" << '\n'; 
+  while(inicializador_barcos2 != 0){
+    if(num_submarino2 != 0){
+      std::cout << "Ponha seus Submarinos no tabuleiro: " << '\n';
 
-    while(inicializador_barcos2 != 0){
-    std::cin >> _px >> _py;
+      while(inicializador_subs2 != 0){
+      
+      std::cin >> _px >> _py;
 
-    J2.tabuleiro_defesa[_px][_py] = 'b';
+      while(_px <= 0 || _px >=11 || _py <= 0 || _py >= 23 ){
+        std::cout << '\n' << "Posição inválida, digite novamente: " << '\n';
+        std::cin >> _px >> _py;
+      }
 
-    inicializador_barcos2 --;
-  } 
+      while(J2.tabuleiro_defesa[_px][_py] == 'b'){
+        std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
+        std::cin >> _px >> _py;
+      }
+
+        J2.tabuleiro_defesa[_px][_py] = 'b';
+
+      inicializador_barcos2 --;
+      inicializador_subs2 --;
+    }
+      }
+
+    if(num_cruzador2 != 0){
+      std::cout << "Ponha seus Cruzadores no tabuleiro (lembrando, só será alocado se digitar uma diferença de 2 unidades de casa): " << '\n';
+
+      while(inicializador_cru2 != 0){
+      
+      std::cin >> _px >> _py;
+
+      while(_px <= 0 || _px >=11 || _py <= 0 || _py >= 23){
+        std::cout << '\n' << "Posição inválida, digite novamente: " << '\n';
+        std::cin >> _px >> _py;
+          
+      }
+
+        int diferenca2 = _px - _py;
+
+        if(diferenca2 < 0){
+          diferenca2 = -1 * (diferenca2);
+        }
+
+        while(diferenca2 != 2){
+          std::cout << diferenca2 << '\n';
+          std::cout << '\n' << "Quantidade invalida de casas, digite novamente: " << '\n';
+          std::cin >> _px >> _py;
+          diferenca2 = _px - _py;
+
+          if(diferenca2 < 0){
+          diferenca2 = -1 * (diferenca2);
+        }
+          
+        }
+
+      while(J2.tabuleiro_defesa[_px][_py] == 'b' || J2.tabuleiro_defesa[_py][_py] == 'b' || J2.tabuleiro_defesa[_px][_px] == 'b'
+        || J2.tabuleiro_defesa[_py + 1][_py] == 'b' || J2.tabuleiro_defesa[_px][_px + 1] == 'b'){
+        
+        std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
+        std::cin >> _px >> _py;
+      }
+        if(_px > _py){
+          J2.tabuleiro_defesa[_px][_py] = 'b';
+          J2.tabuleiro_defesa[_py][_py] = 'b';
+          J2.tabuleiro_defesa[_py + 1][_py] = 'b';
+        }
+
+        else{J2.tabuleiro_defesa[_px][_py] = 'b';
+        J2.tabuleiro_defesa[_px][_px] = 'b';
+        J2.tabuleiro_defesa[_px][_px + 1] = 'b';}
+
+
+      inicializador_barcos2 --;
+      inicializador_cru2 --;
+    }
+      }
+
+    if(num_destroyer2 != 0){
+      std::cout << "Ponha seus Destroyers no tabuleiro (lembrando, só será alocado se digitar uma diferença de 3 unidades de casa): " << '\n';
+
+      while(inicializador_des2 != 0){
+      
+      std::cin >> _px >> _py;
+
+      while(_px <= 0 || _px >=11 || _py <= 0 || _py >= 23){
+        std::cout << '\n' << "Posição inválida, digite novamente: " << '\n';
+        std::cin >> _px >> _py;
+      }
+
+      int diferenca2 = _px - _py;
+
+        if(diferenca2 < 0){
+          diferenca2 = -1 * (diferenca2);
+        }
+
+        while(diferenca2 != 3){
+          std::cout << diferenca2 << '\n';
+          std::cout << '\n' << "Quantidade invalida de casas, digite novamente: " << '\n';
+          std::cin >> _px >> _py;
+          diferenca2 = _px - _py;
+
+          if(diferenca2 < 0){
+          diferenca2 = -1 * (diferenca2);
+        }
+          
+        }
+
+      while(J2.tabuleiro_defesa[_px][_py] == 'b' || J2.tabuleiro_defesa[_py][_py] == 'b' || J2.tabuleiro_defesa[_px][_px] == 'b'
+        || J2.tabuleiro_defesa[_py + 1][_py] == 'b' || J2.tabuleiro_defesa[_px][_px + 1] == 'b' || J2.tabuleiro_defesa[_py + 2][_py] == 'b' || J2.tabuleiro_defesa[_px][_px + 2] == 'b'){
+        
+        std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
+        std::cin >> _px >> _py;
+      }
+        if(_px > _py){
+          J2.tabuleiro_defesa[_px][_py] = 'b';
+          J2.tabuleiro_defesa[_py][_py] = 'b';
+          J2.tabuleiro_defesa[_py + 1][_py] = 'b';
+          J2.tabuleiro_defesa[_py + 2][_py] = 'b';
+        }
+
+        else{J2.tabuleiro_defesa[_px][_py] = 'b';
+        J2.tabuleiro_defesa[_px][_px] = 'b';
+        J2.tabuleiro_defesa[_px][_px + 1] = 'b';
+        J2.tabuleiro_defesa[_px][_px + 2] = 'b';}
+
+      inicializador_barcos2 --;
+      inicializador_des2 --;
+    }
+      }
+
+    if(num_p_avioes2 != 0){
+      std::cout << "Ponha seus Porta-Aviões no tabuleiro (lembrando, só será alocado se digitar uma diferença de 4 unidades de casa): " << '\n';
+
+      while(inicializador_pt_a2 != 0){
+      
+      std::cin >> _px >> _py;
+
+      while(_px <= 0 || _px >=11 || _py <= 0 || _py >= 23){
+        std::cout << '\n' << "Posição inválida, digite novamente: " << '\n';
+        std::cin >> _px >> _py;
+      }
+
+      
+      int diferenca2 = _px - _py;
+
+        if(diferenca2 < 0){
+          diferenca2 = -1 * (diferenca2);
+        }
+
+        while(diferenca2 != 4){
+          std::cout << diferenca2 << '\n';
+          std::cout << '\n' << "Quantidade invalida de casas, digite novamente: " << '\n';
+          std::cin >> _px >> _py;
+          diferenca2 = _px - _py;
+
+          if(diferenca2 < 0){
+          diferenca2 = -1 * (diferenca2);
+        }
+          
+        }
+
+      while(J2.tabuleiro_defesa[_px][_py] == 'b' || J2.tabuleiro_defesa[_py][_py] == 'b' || J2.tabuleiro_defesa[_px][_px] == 'b'
+        || J2.tabuleiro_defesa[_py + 1][_py] == 'b' || J2.tabuleiro_defesa[_px][_px + 1] == 'b' || J2.tabuleiro_defesa[_py + 2][_py] == 'b' || J2.tabuleiro_defesa[_px][_px + 2] == 'b' || J2.tabuleiro_defesa[_py + 3][_py] == 'b' || J2.tabuleiro_defesa[_px][_px + 3] == 'b'){
+        
+        std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
+        std::cin >> _px >> _py;
+      }
+        if(_px > _py){
+          J2.tabuleiro_defesa[_px][_py] = 'b';
+          J2.tabuleiro_defesa[_py][_py] = 'b';
+          J2.tabuleiro_defesa[_py + 1][_py] = 'b';
+          J2.tabuleiro_defesa[_py + 2][_py] = 'b';
+          J2.tabuleiro_defesa[_py + 3][_py] = 'b';
+          
+        }
+
+        else{J2.tabuleiro_defesa[_px][_py] = 'b';
+        J2.tabuleiro_defesa[_px][_px] = 'b';
+        J2.tabuleiro_defesa[_px][_px + 1] = 'b';
+        J2.tabuleiro_defesa[_px][_px + 2] = 'b';
+        J2.tabuleiro_defesa[_px][_px + 3] = 'b';}
+
+      inicializador_barcos2 --;
+      inicializador_pt_a2 --;
+    }
+      }
+  }  
 
   for(int i = 0; i < 12; i ++){
     for(int j = 0; j < 24; j++){
