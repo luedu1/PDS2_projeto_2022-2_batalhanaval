@@ -8,8 +8,12 @@ class Jogador{
   public:
   std::string nome;
   int num_barcos;
+  //std::string Nome;
+  char tabuleiro_ataque[12][24];
+  char tabuleiro_defesa[12][24];
 
-  bool validar_barcos();
+  void get_nome();
+
 };
 
 
