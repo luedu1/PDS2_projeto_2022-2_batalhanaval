@@ -25,7 +25,7 @@ std::cout << '\n' << Linha << '\n' ;
 
 alocar_barcos(J2); 
 
-std::cout << '\n' << "Vamos dar início ao posicionamento das peças no tabuleiro!" << '\n' << '\n';
+std::cout << '\n' << Linha << '\n' << '\n' << "Vamos dar início ao posicionamento das peças no tabuleiro!" << '\n' << '\n';
 
   J1.num_barcos = J1.num_submarino + J1.num_cruzador + J1.num_destroyer + J1.num_p_avioes;
   J2.num_barcos = J2.num_submarino + J2.num_cruzador + J2.num_destroyer + J2.num_p_avioes;
