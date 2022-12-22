@@ -32,7 +32,7 @@ void montar_tabuleiro(Jogador &J1_){
 };
 
 void alocar_barcos(Jogador &J1_){
-  std::cout << '\n' << J1_.nome << ", digite a quantidade de barcos que quer no tabuleiro:";
+std::cout << '\n' << J1_.nome << ", digite a quantidade de barcos que quer no tabuleiro:";
   
 std::cout << '\n' << '\n' << "Submarino(" << J1_.pos_restantes << " posições restantes): ";
 
@@ -109,23 +109,114 @@ else{
 }
 
   if(J1_.pos_restantes == 0){
-    std::cout << '\n'<< linha_ << '\n' << "|                                              Pronto, todas as suas posições foram alocadas!                                                                         |";
+    std::cout << '\n'<< linha_ << '\n' << "|                                                                    Pronto, todas as suas posições foram alocadas!                                                                |";
   }
 
 //------------------------------------------------------------------------------------------------------------------------------------------//
   
 while(J1_.pos_restantes != 0){
   std::cout << '\n'<< linha_ << '\n';
-  std::cout << '\n' << "Ainda faltam " << J1_.pos_restantes << " posição(ões) a serem preenchidas. Deseja finalizar sua alocação (1) ou adicionar mais barcos (2)?" << '\n' << '\n';
+  std::cout << '\n' << "Ainda faltam " << J1_.pos_restantes << " posição(ões) a serem preenchidas. Deseja finalizar sua alocação (1) ou adicionar mais barcos (2)?"<< '\n' << '\n' << "-> ";
 
   int escolha;
 
   std::cin >> escolha;
 
+  while(escolha < 1 || escolha > 2){
+    std::cout << "Opção errada, digite novamente: " << '\n' << '\n' << "-> ";
+    std::cin >> escolha;
+  }
+
   switch(escolha){
     case 1:
+
+    
+    while(J1_.pos_restantes == 14){
+      std::cout << "Opção inválida, você precisa de pelo menos um barco no tabuleiro!" << '\n';
+
+      std::cout << '\n' << "Qual tipo de barco deseja alocar?" << '\n' << '\n' << "Ainda lhe restam: " << '\n' << '\n';
+
+    std::cout << "*Submarinos: " << J1_.pos_restantes << '\n' << '\n';
+
+    if(J1_.pos_restantes/3 != 0){
+       std::cout << "*Cruzadores: " << (J1_.pos_restantes/3) << '\n' << '\n';
+    }
+
+    if(J1_.pos_restantes/4 != 0){
+       std::cout << "*Destroyers: " << (J1_.pos_restantes/4) << '\n' << '\n';
+    }
+
+    if(J1_.pos_restantes/5 != 0){
+       std::cout << "*Porta-aviões: " << (J1_.pos_restantes/5) << '\n' << '\n';
+    }
+
+    std::cout << "Quer alocar quantos Submarinos? " << '\n' << '\n';
+
+    int add_sub;
+    std::cin >> add_sub;
+
+      while(add_sub < 0 || add_sub > J1_.pos_restantes){
+        std::cout << '\n' << "Número invávlido, digite novamente: ";
+        std:: cin >> add_sub;
+      }
+
+    J1_.pos_restantes -= add_sub;
+    J1_.num_submarino += add_sub;
+
+    if(J1_.pos_restantes/3 != 0){
+       std::cout << '\n' << "Quer alocar quantos Cruzadores? " << '\n' << '\n';
+
+    int add_cru;
+    std::cin >> add_cru;
+
+      while(add_cru < 0 || add_cru > J1_.pos_restantes){
+        std::cout << '\n' << "Número invávlido, digite novamente: ";
+        std:: cin >> add_cru;
+      }
+
+    J1_.pos_restantes -= 3*add_cru;
+    J1_.num_cruzador += add_cru;
+    }
+
+    if(J1_.pos_restantes/4 != 0){
+       std::cout << '\n' << "Quer alocar quantos Destroyers? " << '\n' << '\n';
+
+    int add_des;
+    std::cin >> add_des;
+
+      while(add_des < 0 || add_des > J1_.pos_restantes){
+        std::cout << '\n' << "Número invávlido, digite novamente: ";
+        std:: cin >> add_des;
+      }
+
+    J1_.pos_restantes -= 4*add_des;
+    J1_.num_destroyer += add_des;
+    }
+
+    if(J1_.pos_restantes/5 != 0){
+       std::cout << '\n' << "Quer alocar quantos Porta-aviões? "<< '\n' << '\n';
+
+    int add_pta;
+    std::cin >> add_pta;
+
+      while(add_pta < 0 || add_pta > J1_.pos_restantes){
+        std::cout << '\n' << "Número invávlido, digite novamente: ";
+        std:: cin >> add_pta;
+      }
+
+    J1_.pos_restantes -= 5*add_pta;
+    J1_.num_p_avioes += add_pta;
+    }
+
+    if(J1_.pos_restantes == 0){
+      std::cout << '\n'<< linha_ << '\n' << "|                                                                    Pronto, todas as suas posições foram alocadas!                                                                |";
+    }
+
+      
+    }
+      
     J1_.pos_restantes = 0;
-    std::cout << '\n'<< linha_ << '\n' << "Pronto, todas as suas posições foram alocadas!";
+    std::cout << '\n'<< linha_ << '\n' << "|                                                                    Pronto, todas as suas posições foram alocadas!                                                                |";
     break;
 
     case 2:
@@ -204,7 +295,7 @@ while(J1_.pos_restantes != 0){
     }
 
     if(J1_.pos_restantes == 0){
-      std::cout << '\n'<< linha_ << '\n' << '\n' << "Pronto, todas as suas posições foram alocadas!" << '\n';
+      std::cout << '\n'<< linha_ << '\n' << "|                                                                    Pronto, todas as suas posições foram alocadas!                                                                |";
     }
 
     break;
@@ -329,7 +420,7 @@ void posicionar_barcos(Jogador &J1_){
         while(contador_crz !=0){
           std::cin >> _px;
 
-          while(J1_.tabuleiro_defesa[px][_py] == 'S' || J1.tabuleiro_defesa[_px][_py] == 'C'){
+          while(J1_.tabuleiro_defesa[_px][_py] == 'S' || J1_.tabuleiro_defesa[_px][_py] == 'C'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n' << '\n' << "Linha -> ";
             std::cin >> _px;
           }
@@ -361,7 +452,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _px2;
           }
 
-          while(J1_.tabuleiro_defesa[px2][_py] == 'S' || J1.tabuleiro_defesa[_px2][_py] == 'C'){
+          while(J1_.tabuleiro_defesa[_px2][_py] == 'S' || J1_.tabuleiro_defesa[_px2][_py] == 'C'){
             std::cout << '\n' << "Posição já alocada, digite outra: "<< '\n' << '\n' << "Linha -> ";
             std::cin >> _px2;
           }
@@ -393,7 +484,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _px3;
           }
 
-          while(J1_.tabuleiro_defesa[px3][_py] == 'S' || J1.tabuleiro_defesa[_px3][_py] == 'C'){
+          while(J1_.tabuleiro_defesa[_px3][_py] == 'S' || J1_.tabuleiro_defesa[_px3][_py] == 'C'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _px3;
           }
@@ -425,7 +516,7 @@ void posicionar_barcos(Jogador &J1_){
         while(contador_crz !=0){
           std::cin >> _py;
 
-          while(J1_.tabuleiro_defesa[px][_py] == 'S' || J1.tabuleiro_defesa[_px][_py] == 'C'){
+          while(J1_.tabuleiro_defesa[_px][_py] == 'S' || J1_.tabuleiro_defesa[_px][_py] == 'C'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _py;
           }
@@ -455,7 +546,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _py2;
           }
 
-          while(J1_.tabuleiro_defesa[px][_py2] == 'S' || J1.tabuleiro_defesa[_px][_py2] == 'C'){
+          while(J1_.tabuleiro_defesa[_px][_py2] == 'S' || J1_.tabuleiro_defesa[_px][_py2] == 'C'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _py2;
           }
@@ -485,7 +576,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _py3;
           }
 
-          while(J1_.tabuleiro_defesa[px][_py3] == 'S' || J1.tabuleiro_defesa[_px][_py3] == 'C'){
+          while(J1_.tabuleiro_defesa[_px][_py3] == 'S' || J1_.tabuleiro_defesa[_px][_py3] == 'C'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _py3;
           }
@@ -561,7 +652,7 @@ void posicionar_barcos(Jogador &J1_){
         while(contador_des !=0){
           std::cin >> _px;
 
-          while(J1_.tabuleiro_defesa[px][_py] == 'S' || J1.tabuleiro_defesa[px][_py] == 'C' || J1.tabuleiro_defesa[_px][_py] == 'D'){
+          while(J1_.tabuleiro_defesa[_px][_py] == 'S' || J1_.tabuleiro_defesa[_px][_py] == 'C' || J1_.tabuleiro_defesa[_px][_py] == 'D'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n' << '\n' << "Linha -> ";
             std::cin >> _px;
           }
@@ -593,7 +684,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _px2;
           }
 
-          while(J1_.tabuleiro_defesa[px2][_py] == 'S' || J1.tabuleiro_defesa[px2][_py] == 'C'|| J1.tabuleiro_defesa[_px2][_py] == 'D'){
+          while(J1_.tabuleiro_defesa[_px2][_py] == 'S' || J1_.tabuleiro_defesa[_px2][_py] == 'C'|| J1_.tabuleiro_defesa[_px2][_py] == 'D'){
             std::cout << '\n' << "Posição já alocada, digite outra: "<< '\n' << '\n' << "Linha -> ";
             std::cin >> _px2;
           }
@@ -625,7 +716,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _px3;
           }
 
-          while(J1_.tabuleiro_defesa[px3][_py] == 'S' || J1.tabuleiro_defesa[px3][_py] == 'C'|| J1.tabuleiro_defesa[_px3][_py] == 'D'){
+          while(J1_.tabuleiro_defesa[_px3][_py] == 'S' || J1_.tabuleiro_defesa[_px3][_py] == 'C'|| J1_.tabuleiro_defesa[_px3][_py] == 'D'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _px3;
           }
@@ -657,7 +748,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _px4;
           }
 
-          while(J1_.tabuleiro_defesa[px4][_py] == 'S' || J1.tabuleiro_defesa[px4][_py] == 'C'|| J1.tabuleiro_defesa[_px4][_py] == 'D'){
+          while(J1_.tabuleiro_defesa[_px4][_py] == 'S' || J1_.tabuleiro_defesa[_px4][_py] == 'C'|| J1_.tabuleiro_defesa[_px4][_py] == 'D'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _px4;
           }
@@ -689,7 +780,7 @@ void posicionar_barcos(Jogador &J1_){
         while(contador_des !=0){
           std::cin >> _py;
 
-          while(J1_.tabuleiro_defesa[px][_py] == 'S' || J1.tabuleiro_defesa[px][_py] == 'C' || J1.tabuleiro_defesa[_px][_py] == 'D'){
+          while(J1_.tabuleiro_defesa[_px][_py] == 'S' || J1_.tabuleiro_defesa[_px][_py] == 'C' || J1_.tabuleiro_defesa[_px][_py] == 'D'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _py;
           }
@@ -719,7 +810,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _py2;
           }
 
-          while(J1_.tabuleiro_defesa[px][_py2] == 'S' || J1.tabuleiro_defesa[px][_py2] == 'C'|| J1.tabuleiro_defesa[_px][_py2] == 'D'){
+          while(J1_.tabuleiro_defesa[_px][_py2] == 'S' || J1_.tabuleiro_defesa[_px][_py2] == 'C'|| J1_.tabuleiro_defesa[_px][_py2] == 'D'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _py2;
           }
@@ -749,7 +840,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _py3;
           }
 
-          while(J1_.tabuleiro_defesa[px][_py3] == 'S' || J1.tabuleiro_defesa[px][_py3] == 'C'|| J1.tabuleiro_defesa[_px][_py3] == 'D'){
+          while(J1_.tabuleiro_defesa[_px][_py3] == 'S' || J1_.tabuleiro_defesa[_px][_py3] == 'C'|| J1_.tabuleiro_defesa[_px][_py3] == 'D'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _py3;
           }
@@ -779,7 +870,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _py4;
           }
 
-          while(J1_.tabuleiro_defesa[px][_py4] == 'S' || J1.tabuleiro_defesa[px][_py4] == 'C'|| J1.tabuleiro_defesa[_px][_py4] == 'D'){
+          while(J1_.tabuleiro_defesa[_px][_py4] == 'S' || J1_.tabuleiro_defesa[_px][_py4] == 'C'|| J1_.tabuleiro_defesa[_px][_py4] == 'D'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _py3;
           }
@@ -855,7 +946,7 @@ void posicionar_barcos(Jogador &J1_){
         while(contador_pta !=0){
           std::cin >> _px;
 
-          while(J1_.tabuleiro_defesa[px][_py] == 'S' || J1.tabuleiro_defesa[px][_py] == 'C' || J1.tabuleiro_defesa[px][_py] == 'D'|| J1.tabuleiro_defesa[_px][_py] == 'P'){
+          while(J1_.tabuleiro_defesa[_px][_py] == 'S' || J1_.tabuleiro_defesa[_px][_py] == 'C' || J1_.tabuleiro_defesa[_px][_py] == 'D'|| J1_.tabuleiro_defesa[_px][_py] == 'P'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n' << '\n' << "Linha -> ";
             std::cin >> _px;
           }
@@ -887,7 +978,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _px2;
           }
 
-          while(J1_.tabuleiro_defesa[px2][_py] == 'S' || J1.tabuleiro_defesa[px2][_py] == 'C'|| J1.tabuleiro_defesa[px2][_py] == 'D'|| J1.tabuleiro_defesa[_px2][_py] == 'P'){
+          while(J1_.tabuleiro_defesa[_px2][_py] == 'S' || J1_.tabuleiro_defesa[_px2][_py] == 'C'|| J1_.tabuleiro_defesa[_px2][_py] == 'D'|| J1_.tabuleiro_defesa[_px2][_py] == 'P'){
             std::cout << '\n' << "Posição já alocada, digite outra: "<< '\n' << '\n' << "Linha -> ";
             std::cin >> _px2;
           }
@@ -919,7 +1010,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _px3;
           }
 
-          while(J1_.tabuleiro_defesa[px3][_py] == 'S' || J1.tabuleiro_defesa[px3][_py] == 'C'|| J1.tabuleiro_defesa[px3][_py] == 'D'|| J1.tabuleiro_defesa[_px3][_py] == 'P'){
+          while(J1_.tabuleiro_defesa[_px3][_py] == 'S' || J1_.tabuleiro_defesa[_px3][_py] == 'C'|| J1_.tabuleiro_defesa[_px3][_py] == 'D'|| J1_.tabuleiro_defesa[_px3][_py] == 'P'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _px3;
           }
@@ -951,7 +1042,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _px4;
           }
 
-          while(J1_.tabuleiro_defesa[px4][_py] == 'S' || J1.tabuleiro_defesa[px4][_py] == 'C'|| J1.tabuleiro_defesa[px4][_py] == 'D'|| J1.tabuleiro_defesa[_px4][_py] == 'P'){
+          while(J1_.tabuleiro_defesa[_px4][_py] == 'S' || J1_.tabuleiro_defesa[_px4][_py] == 'C'|| J1_.tabuleiro_defesa[_px4][_py] == 'D'|| J1_.tabuleiro_defesa[_px4][_py] == 'P'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _px4;
           }
@@ -983,7 +1074,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _px5;
           }
 
-          while(J1_.tabuleiro_defesa[px5][_py] == 'S' || J1.tabuleiro_defesa[px5][_py] == 'C'|| J1.tabuleiro_defesa[px5][_py] == 'D'|| J1.tabuleiro_defesa[_px5][_py] == 'P'){
+          while(J1_.tabuleiro_defesa[_px5][_py] == 'S' || J1_.tabuleiro_defesa[_px5][_py] == 'C'|| J1_.tabuleiro_defesa[_px5][_py] == 'D'|| J1_.tabuleiro_defesa[_px5][_py] == 'P'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _px5;
           }
@@ -1016,7 +1107,7 @@ void posicionar_barcos(Jogador &J1_){
         while(contador_pta !=0){
           std::cin >> _py;
 
-          while(J1_.tabuleiro_defesa[px][_py] == 'S' || J1.tabuleiro_defesa[px][_py] == 'C' || J1.tabuleiro_defesa[px][_py] == 'D'|| J1.tabuleiro_defesa[_px][_py] == 'P'){
+          while(J1_.tabuleiro_defesa[_px][_py] == 'S' || J1_.tabuleiro_defesa[_px][_py] == 'C' || J1_.tabuleiro_defesa[_px][_py] == 'D'|| J1_.tabuleiro_defesa[_px][_py] == 'P'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _py;
           }
@@ -1046,7 +1137,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _py2;
           }
 
-          while(J1_.tabuleiro_defesa[px][_py2] == 'S' || J1.tabuleiro_defesa[px][_py2] == 'C'|| J1.tabuleiro_defesa[px][_py2] == 'D'|| J1.tabuleiro_defesa[_px][_py2] == 'P'){
+          while(J1_.tabuleiro_defesa[_px][_py2] == 'S' || J1_.tabuleiro_defesa[_px][_py2] == 'C'|| J1_.tabuleiro_defesa[_px][_py2] == 'D'|| J1_.tabuleiro_defesa[_px][_py2] == 'P'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _py2;
           }
@@ -1076,7 +1167,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _py3;
           }
 
-          while(J1_.tabuleiro_defesa[px][_py3] == 'S' || J1.tabuleiro_defesa[px][_py3] == 'C'|| J1.tabuleiro_defesa[px][_py3] == 'D'|| J1.tabuleiro_defesa[_px][_py3] == 'P'){
+          while(J1_.tabuleiro_defesa[_px][_py3] == 'S' || J1_.tabuleiro_defesa[_px][_py3] == 'C'|| J1_.tabuleiro_defesa[_px][_py3] == 'D'|| J1_.tabuleiro_defesa[_px][_py3] == 'P'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _py3;
           }
@@ -1106,7 +1197,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _py4;
           }
 
-          while(J1_.tabuleiro_defesa[px][_py4] == 'S' || J1.tabuleiro_defesa[px][_py4] == 'C'|| J1.tabuleiro_defesa[px][_py4] == 'D'|| J1.tabuleiro_defesa[_px][_py4] == 'P'){
+          while(J1_.tabuleiro_defesa[_px][_py4] == 'S' || J1_.tabuleiro_defesa[_px][_py4] == 'C'|| J1_.tabuleiro_defesa[_px][_py4] == 'D'|| J1_.tabuleiro_defesa[_px][_py4] == 'P'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _py4;
           }
@@ -1136,7 +1227,7 @@ void posicionar_barcos(Jogador &J1_){
             std::cin >> _py5;
           }
 
-          while(J1_.tabuleiro_defesa[px][_py5] == 'S' || J1.tabuleiro_defesa[px][_py5] == 'C'|| J1.tabuleiro_defesa[px][_py5] == 'D'|| J1.tabuleiro_defesa[_px][_py5] == 'P'){
+          while(J1_.tabuleiro_defesa[_px][_py5] == 'S' || J1_.tabuleiro_defesa[_px][_py5] == 'C'|| J1_.tabuleiro_defesa[_px][_py5] == 'D'|| J1_.tabuleiro_defesa[_px][_py5] == 'P'){
             std::cout << '\n' << "Posição já alocada, digite outra: " << '\n';
             std::cin >> _py5;
           }
@@ -1172,26 +1263,54 @@ void jogadas(Jogador &J1_, Jogador &J2_){
   int Px, Py, Px2, Py2;
   
   while(J2_.num_barcos != 0 || J1_.num_barcos != 0){
+
+    std::cout << J1_.nome << ", aqui está o seu tabuleiro de defesa: " << '\n' << '\n';
+
+    for(int i = 0; i < 12; i ++){
+    for(int j = 0; j < 24; j++){
+      std::cout << J1_.tabuleiro_defesa[i][j];
+    }
+    std::cout << '\n';
+  }
+    std::cout << '\n' << '\n';
+
+    std::cout << J1_.nome << ", aqui está o seu tabuleiro de ataque: " << '\n' << '\n';
+
+    for(int i = 0; i < 12; i ++){
+    for(int j = 0; j < 24; j++){
+      std::cout << J1_.tabuleiro_ataque[i][j];
+    }
+    std::cout << '\n';
+  }
+    std::cout << '\n' << '\n';
     
     std::cout << J1_.nome << ", digite onde quer fazer seu ataque: " << '\n' << '\n';
 
     std::cin >> Px >> Py;
 
-    J1_.tabuleiro_ataque[Px][Py] = '0';
+    while(J1_.tabuleiro_ataque[Px][Py] == '0'){
+      std::cout << "Ataque vazio repetido, tente outra posição: " << '\n' << '\n' << "-> ";
+      std::cin >> Px >> Py;
+    };
 
-    if(J2_.tabuleiro_defesa[Px][Py] == 'b'){
+    while(J1_.tabuleiro_ataque[Px][Py] == 'X'){
+      std::cout << "Ataque em barco repetido, tente outra posição: " << '\n' << '\n' << "-> ";
+      std::cin >> Px >> Py;
+    }
+
+    if(J2_.tabuleiro_defesa[Px][Py] == '~'){
+      J1_.tabuleiro_ataque[Px][Py] = '0';
+    }
+
+    if(J2_.tabuleiro_defesa[Px][Py] == 'S' || J2_.tabuleiro_defesa[Px][Py] == 'C' || J2_.tabuleiro_defesa[Px][Py] == 'D' || J2_.tabuleiro_defesa[Px][Py] == 'P'){
       J2_.tabuleiro_defesa[Px][Py] = 'X';
       J1_.tabuleiro_ataque[Px][Py] = 'X';
       J2_.num_barcos --;
     }
+    
+    std::cout << '\n';
 
-    for(int i = 0; i < 12; i ++){
-    for(int j = 0; j < 24; j++){
-      std::cout << J2_.tabuleiro_defesa[i][j];
-    }
-    std::cout << '\n';
-  }
-    std::cout << '\n';
+    std::cout << J1_.nome << ", aqui está o seu novo tabuleiro de ataque: " << '\n' << '\n';
 
     for(int i = 0; i < 12; i ++){
     for(int j = 0; j < 24; j++){
@@ -1204,26 +1323,53 @@ void jogadas(Jogador &J1_, Jogador &J2_){
     if(J2_.num_barcos == 0 || J1_.num_barcos == 0){
       break;}
 
-  std::cout << J2_.nome << ", digite onde quer fazer seu ataque: " << '\n' << '\n';
+     std::cout << J2_.nome << ", aqui está o seu tabuleiro de defesa: " << '\n' << '\n';
+
+    for(int i = 0; i < 12; i ++){
+    for(int j = 0; j < 24; j++){
+      std::cout << J2_.tabuleiro_defesa[i][j];
+    }
+    std::cout << '\n';
+  }
+    std::cout << '\n' << '\n';
+
+    std::cout << J2_.nome << ", aqui está o seu tabuleiro de ataque: " << '\n' << '\n';
+
+    for(int i = 0; i < 12; i ++){
+    for(int j = 0; j < 24; j++){
+      std::cout << J2_.tabuleiro_ataque[i][j];
+    }
+    std::cout << '\n';
+  }
+    std::cout << '\n' << '\n';
+    
+    std::cout << J2_.nome << ", digite onde quer fazer seu ataque: " << '\n' << '\n';
 
     std::cin >> Px2 >> Py2;
 
-    J2_.tabuleiro_ataque[Px2][Py2] = '0';
+    while(J2_.tabuleiro_ataque[Px2][Py2] == '0'){
+      std::cout << "Ataque vazio repetido, tente outra posição: " << '\n' << '\n' << "-> ";
+      std::cin >> Px2 >> Py2;
+    };
 
-    if(J1_.tabuleiro_defesa[Px2][Py2] == 'b'){
+    while(J1_.tabuleiro_ataque[Px2][Py2] == 'X'){
+      std::cout << "Ataque em barco repetido, tente outra posição: " << '\n' << '\n' << "-> ";
+      std::cin >> Px2 >> Py2;
+    };
+
+    if(J1_.tabuleiro_defesa[Px2][Py2] == 'S' || J1_.tabuleiro_defesa[Px2][Py2] == 'C' || J1_.tabuleiro_defesa[Px2][Py2] == 'D' || J1_.tabuleiro_defesa[Px2][Py2] == 'P'){
       J1_.tabuleiro_defesa[Px2][Py2] = 'X';
       J2_.tabuleiro_ataque[Px2][Py2] = 'X';
       J1_.num_barcos --;
     }
-    
 
-    for(int i = 0; i < 12; i ++){
-    for(int j = 0; j < 24; j++){
-      std::cout << J1_.tabuleiro_defesa[i][j];
+    if(J1_.tabuleiro_defesa[Px2][Py2] == '~'){
+      J2_.tabuleiro_ataque[Px2][Py2] = '0';
     }
+
     std::cout << '\n';
-  }
-    std::cout << '\n';
+
+    std::cout << J2_.nome << ", aqui está o seu novo tabuleiro de ataque: " << '\n' << '\n';
 
     for(int i = 0; i < 12; i ++){
     for(int j = 0; j < 24; j++){
@@ -1232,8 +1378,7 @@ void jogadas(Jogador &J1_, Jogador &J2_){
     std::cout << '\n';
   }
     std::cout << '\n';
-
-
+    
     if(J2_.num_barcos == 0 || J1_.num_barcos == 0){
       break;}
   }
