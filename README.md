@@ -18,7 +18,7 @@ Davi Fonseca Dumont - 2020088201 <br />
 -Como jogador, quero poder visualizar os meus barcos no tabuleiro; <br/>
   -> Critério de aceitação => Criar uma função que imprima meus barcos na tela. <br/>
 -Como jogador, gostaria poder fazer um ataque a uma barco inimiga; <br/>
-  -> Critério de acietação => Criar uma função que faça ataques no tabuleiro inimigo. <br/>
+  -> Critério de aceitação => Criar uma função que faça ataques no tabuleiro inimigo. <br/>
 -Como jogador, gostaria de visualizar o tabuleiro inimigo, com marcação onde já realizei ataques; <br/>
   -> Critério de aceitação => Mostrar na tela um tabuleiro de ataques feitos e onde foram acertados. <br/>
 -Como jogador, gostaria de saber com identificação onde ataquei, se acertei o ataque a um navio, ou na água; <br/>
